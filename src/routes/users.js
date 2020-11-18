@@ -1,23 +1,15 @@
 const express = require('express')
-const router = express.Router()
+const router = express.Router();
+const { user } = require('./validator')
+const UserService = require('../controllers/user')
+const userService = new UserService();
 
-const User = require('../models/users')
-
-router.post('/users', async(req, res) => {
-    console.log(req.body);
-    const userDetails = req.body
-    const newuser = await User.query().insert({
-        ...userDetails,
-        created_at : new Date()
-    })
-    return res.send(newuser);
-    
-
-        
+router.post('/users', user.create.body, async (req, res) => {
+    return await userService.createNewUser(req, res)
 })
 
-router.get('/',(req,res)=>{
-    return res.send("Done!!")
+router.get('/users/:id', user.get.params, (req, res) => {
+    return userService.getUserById(req, res)
 })
 
 module.exports = {
