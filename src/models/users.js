@@ -1,6 +1,7 @@
 const Model = require('./index');
 const Joi = require('joi')
 
+
 class User extends Model {
   
   static get tableName() {
@@ -14,6 +15,7 @@ class User extends Model {
       l_name: Joi.string(),
       username: Joi.string(),
       email: Joi.string(),
+      password:Joi.string(),
       created_at: Joi.date().required(),
     });
   }

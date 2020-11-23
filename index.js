@@ -10,6 +10,7 @@ app.use(morgan('dev'));
 app.use('/api', require('./src/routes/todo').router);
 app.use('/api', require('./src/routes/users').router);
 
+
 app.listen(port, () =>
   console.log(`listening on port: ${port}`)
 )
